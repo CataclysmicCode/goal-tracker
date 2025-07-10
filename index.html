@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background: #f9f9f9; }
+        h1 { color: #333; }
+        .goal-list { list-style: none; padding: 0; }
+        .goal-item { background: #fff; margin-bottom: 1rem; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);}
+        .goal-title { font-weight: bold; }
+        .add-goal-form { margin-bottom: 2rem; }
+        input, textarea { width: 100%; padding: 0.5rem; margin-top: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; border: none; background: #007bff; color: #fff; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Goal Tracker</h1>
+    <form class="add-goal-form">
+        <label for="goal-title">Goal Title</label>
+        <input type="text" id="goal-title" name="goal-title" required>
+        <label for="goal-desc">Description</label>
+        <textarea id="goal-desc" name="goal-desc" rows="2"></textarea>
+        <button type="submit">Add Goal</button>
+    </form>
+    <ul class="goal-list" id="goal-list">
+        <!-- Goals will appear here -->
+    </ul>
+    <script>
+        const form = document.querySelector('.add-goal-form');
+        const goalList = document.getElementById('goal-list');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('goal-title').value.trim();
+            const desc = document.getElementById('goal-desc').value.trim();
+            if (title) {
+                const li = document.createElement('li');
+                li.className = 'goal-item';
+                li.innerHTML = `<div class="goal-title">${title}</div>
+                                <div class="goal-desc">${desc}</div>`;
+                goalList.appendChild(li);
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
